@@ -19,8 +19,19 @@ export function WalletLockScreen() {
   const handleUnlock = async () => {
     setLoading(true)
     setError("")
-    const success = await unlock(password)
-    if (!success) setError("Invalid password")
+    try {
+      const success = await unlock(password)
+      if (!success) {
+        setError("Invalid password. If you've imported a wallet before, you may need to clear your data and import again.")
+      }
+    } catch (err: any) {
+      console.error("Unlock error:", err)
+      if (err?.name === "OperationError") {
+        setError("Unable to decrypt wallet. This might be due to corrupted data. Please clear your browser data and import your wallet again.")
+      } else {
+        setError("Invalid password")
+      }
+    }
     setLoading(false)
   }
 
@@ -223,6 +234,26 @@ export function WalletLockScreen() {
                     ? "Create Wallet"
                     : "Import Wallet"}
             </Button>
+
+            {mode === "unlock" && error && (
+              <Button
+                onClick={() => {
+                  if (confirm("Are you sure? This will delete all wallet data. Make sure you have backed up your private keys!")) {
+                    localStorage.removeItem("wallet_encrypted")
+                    localStorage.removeItem("wallet_activities")
+                    localStorage.removeItem("wallet_testnet_mode")
+                    setError("")
+                    setPassword("")
+                    alert("Wallet data cleared. You can now create a new wallet or import an existing one.")
+                    window.location.reload()
+                  }
+                }}
+                variant="outline"
+                className="w-full border-red-300 text-red-600 hover:bg-red-50 font-medium rounded-xl h-10 mt-2 transition-all text-sm"
+              >
+                Clear Wallet Data & Start Fresh
+              </Button>
+            )}
             </div>
           </div>
         </div>

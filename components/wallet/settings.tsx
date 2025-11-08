@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { useWallet } from "./wallet-context"
+import { useWallet } from "./multi-wallet-context"
 
 export function Settings() {
-  const { chain, exportPrivateKey, lock } = useWallet()
+  const { selectedChain, exportPrivateKey, lock } = useWallet()
   const [password, setPassword] = useState("")
   const [revealed, setRevealed] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -12,7 +12,7 @@ export function Settings() {
   async function handleReveal() {
     setError(null)
     try {
-      const key = await exportPrivateKey(chain, password)
+      const key = await exportPrivateKey(password, selectedChain)
       setRevealed(key)
     } catch (e: any) {
       setError(e?.message || "Failed to export private key")
@@ -41,7 +41,7 @@ export function Settings() {
         {error && <div className="mt-2 text-sm text-destructive">{error}</div>}
         {revealed && (
           <div className="mt-3">
-            <div className="text-xs text-muted-foreground mb-1">Private Key ({chain})</div>
+            <div className="text-xs text-muted-foreground mb-1">Private Key ({selectedChain})</div>
             <div className="text-xs break-all rounded border bg-muted/50 p-2">{revealed}</div>
           </div>
         )}

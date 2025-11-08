@@ -341,8 +341,25 @@ export function MultiWalletProvider({ children }: { children: React.ReactNode })
         }
       }
       return true
-    } catch (error) {
+    } catch (error: any) {
       console.error("[v0] Error unlocking wallet:", error)
+      
+      // If it's a decryption error (wrong password or corrupted data)
+      if (error?.name === "OperationError" || error?.message?.includes("decrypt")) {
+        // Check if it might be corrupted old data
+        const encrypted = localStorage.getItem("wallet_encrypted")
+        if (encrypted) {
+          try {
+            // Try to detect if it's old format that needs migration
+            JSON.parse(encrypted)
+            // If we can parse it as JSON, it's likely old unencrypted or differently encrypted data
+            console.warn("[v0] Detected potentially incompatible wallet data. You may need to import your wallet again.")
+          } catch {
+            // It's encrypted, so it's just wrong password
+          }
+        }
+      }
+      
       return false
     }
   }
