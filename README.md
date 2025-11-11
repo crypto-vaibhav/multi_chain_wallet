@@ -229,17 +229,7 @@ GET /api/prices?symbol=bitcoin&period=24h
 }
 ```
 
-## 🎨 Custom Animations
 
-### Floating Gradient Orbs
-```css
-/* Smooth 12-second floating animation */
-@keyframes float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(15px, -15px) scale(1.05); }
-  66% { transform: translate(-10px, 10px) scale(0.95); }
-}
-```
 
 ### Features
 - 3500ms transition timing for ultra-smooth color changes
@@ -247,32 +237,6 @@ GET /api/prices?symbol=bitcoin&period=24h
 - Multiple orbs with staggered delays
 - Responsive blur and opacity
 
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Development Guidelines
-- Follow TypeScript best practices
-- Maintain responsive design principles
-- Test on multiple devices and browsers
-- Document complex functions
-- Keep security as top priority
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🐛 Known Issues
-
-- CoinGecko API has rate limits (50 calls/minute for free tier)
-- Some tokens may not have price data available
-- Transaction history is stored locally (clears on browser data reset)
 
 ## 🗺️ Roadmap
 
@@ -286,28 +250,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [ ] Staking support
 - [ ] Transaction signing with QR codes
 
-## 📧 Contact & Support
-
-- **GitHub**: [@crypto-vaibhav](https://github.com/crypto-vaibhav)
-- **Repository**: [multi_chain_wallet](https://github.com/crypto-vaibhav/multi_chain_wallet)
-- **Issues**: [Report a bug](https://github.com/crypto-vaibhav/multi_chain_wallet/issues)
-
-## ⭐ Acknowledgments
-
-- [Next.js](https://nextjs.org/) - The React Framework
-- [Tailwind CSS](https://tailwindcss.com/) - Styling framework
-- [Shadcn/UI](https://ui.shadcn.com/) - Component library
-- [CoinGecko](https://www.coingecko.com/) - Cryptocurrency data API
-- [Solana](https://solana.com/) - High-performance blockchain
-- [Ethereum](https://ethereum.org/) - Decentralized platform
-
----
 
 <div align="center">
-
-**⚡ Built with ❤️ for the crypto community**
-
-Made with [Next.js](https://nextjs.org/) | Powered by [Web3](https://web3.foundation/)
 
 [⬆ Back to Top](#-multi-chain-crypto-wallet)
 
